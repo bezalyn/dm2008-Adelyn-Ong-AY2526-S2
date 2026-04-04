@@ -16,17 +16,26 @@ function setup() {
 }
 
 function draw() {
-  background(100);
-  ellipse(width / 2, height / 2, circleSize);
+  background(100,40);
+
+
+  for(let i=0; i<3; i++){
+    noStroke();
+    fill (circleSize%255,random(255),random(255));
+    ellipse(width/4*(i+1),height/2,circleSize*(i+1));
+
+  }
+
 
   // Receive data from Arduino
   if (port.opened()) {
     sensorVal = port.readUntil("\n");
     // Only log data that has information, not empty signals
     if (sensorVal[0]) {
+
       // Once you verify data is coming in,
       // disable logging to improve performance
-      console.log(sensorVal);
+      // console.log(sensorVal);
 
       // OPTION 1:
       // Update circle's size with sensor's data directly
